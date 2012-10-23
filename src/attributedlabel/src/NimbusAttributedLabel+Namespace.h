@@ -31,6 +31,27 @@
 #ifndef NIAttributedLabel
 #define NIAttributedLabel __NIMBUS_NS_SYMBOL(NIAttributedLabel)
 #endif
+#ifndef NIAttributedLabelImage
+#define NIAttributedLabelImage __NIMBUS_NS_SYMBOL(NIAttributedLabelImage)
+#endif
+#ifndef NI_FIX_CATEGORY_BUG_NSMutableAttributedStringNimbusAttributedLabel
+#define NI_FIX_CATEGORY_BUG_NSMutableAttributedStringNimbusAttributedLabel __NIMBUS_NS_SYMBOL(NI_FIX_CATEGORY_BUG_NSMutableAttributedStringNimbusAttributedLabel)
+#endif
 // Functions
+#ifndef NISizeOfAttributedStringConstrainedToSize
+#define NISizeOfAttributedStringConstrainedToSize __NIMBUS_NS_SYMBOL(NISizeOfAttributedStringConstrainedToSize)
+#endif
+#ifndef ImageDelegateDeallocCallback
+#define ImageDelegateDeallocCallback __NIMBUS_NS_SYMBOL(ImageDelegateDeallocCallback)
+#endif
+#ifndef ImageDelegateGetAscentCallback
+#define ImageDelegateGetAscentCallback __NIMBUS_NS_SYMBOL(ImageDelegateGetAscentCallback)
+#endif
+#ifndef ImageDelegateGetDescentCallback
+#define ImageDelegateGetDescentCallback __NIMBUS_NS_SYMBOL(ImageDelegateGetDescentCallback)
+#endif
+#ifndef ImageDelegateGetWidthCallback
+#define ImageDelegateGetWidthCallback __NIMBUS_NS_SYMBOL(ImageDelegateGetWidthCallback)
+#endif
 // Externs
 #endif
