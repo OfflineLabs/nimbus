@@ -109,6 +109,8 @@ typedef enum {
 - (void)insertImage:(UIImage *)image atIndex:(NSInteger)index margins:(UIEdgeInsets)margins;
 - (void)insertImage:(UIImage *)image atIndex:(NSInteger)index margins:(UIEdgeInsets)margins verticalTextAlignment:(NIVerticalTextAlignment)verticalTextAlignment;
 
+- (CGSize)sizeThatFits:(CGSize)size;
+
 @property (nonatomic, NI_WEAK) IBOutlet id<NIAttributedLabelDelegate> delegate;
 @end
 
