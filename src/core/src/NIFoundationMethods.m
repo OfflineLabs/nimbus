@@ -36,8 +36,35 @@ CGRect NIRectContract(CGRect rect, CGFloat dx, CGFloat dy) {
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
+CGRect NIRectExpand(CGRect rect, CGFloat dx, CGFloat dy) {
+  return CGRectMake(rect.origin.x, rect.origin.y, rect.size.width + dx, rect.size.height + dy);
+}
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
 CGRect NIRectShift(CGRect rect, CGFloat dx, CGFloat dy) {
   return CGRectOffset(NIRectContract(rect, dx, dy), dx, dy);
+}
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+CGRect NIEdgeInsetsOutsetRect(CGRect rect, UIEdgeInsets outsets) {
+  return CGRectMake(rect.origin.x - outsets.left,
+                    rect.origin.y - outsets.top,
+                    rect.size.width + outsets.left + outsets.right,
+                    rect.size.height + outsets.top + outsets.bottom);
+}
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+CGFloat NICenterX(CGSize containerSize, CGSize size) {
+  return floorf((containerSize.width - size.width) / 2.f);
+}
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+CGFloat NICenterY(CGSize containerSize, CGSize size) {
+  return floorf((containerSize.height - size.height) / 2.f);
 }
 
 
@@ -46,9 +73,32 @@ CGRect NIFrameOfCenteredViewWithinView(UIView* viewToCenter, UIView* containerVi
   CGPoint origin;
   CGSize containerViewSize = containerView.bounds.size;
   CGSize viewSize = viewToCenter.frame.size;
-  origin.x = floorf((containerViewSize.width - viewSize.width) / 2.f);
-  origin.y = floorf((containerViewSize.height - viewSize.height) / 2.f);
+  origin.x = NICenterX(containerViewSize, viewSize);
+  origin.y = NICenterY(containerViewSize, viewSize);
   return CGRectMake(origin.x, origin.y, viewSize.width, viewSize.height);
+}
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////
+CGSize NISizeOfStringWithLabelProperties(NSString *string, CGSize constrainedToSize, UIFont *font, NSLineBreakMode lineBreakMode, NSInteger numberOfLines) {
+  if (string.length == 0) {
+    return CGSizeZero;
+  }
+
+  CGFloat lineHeight = font.lineHeight;
+  CGSize size = CGSizeZero;
+
+  if (numberOfLines == 1) {
+    size = [string sizeWithFont:font forWidth:constrainedToSize.width lineBreakMode:lineBreakMode];
+
+  } else {
+    size = [string sizeWithFont:font constrainedToSize:constrainedToSize lineBreakMode:lineBreakMode];
+    if (numberOfLines > 0) {
+      size.height = MIN(size.height, numberOfLines * lineHeight);
+    }
+  }
+
+  return size;
 }
 
 

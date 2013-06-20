@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		2B960E8015AE3A3B005714CA /* NavigationAppearanceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B960E7F15AE3A3B005714CA /* NavigationAppearanceViewController.m */; };
 		2B960E8415AE41FC005714CA /* navigationbar.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B960E8315AE41FC005714CA /* navigationbar.png */; };
+		3616212C16812222002A9078 /* AlignmentAttributedLabelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3616212A16812222002A9078 /* AlignmentAttributedLabelViewController.m */; };
+		3616212D16812222002A9078 /* AlignmentAttributedLabelViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3616212B16812222002A9078 /* AlignmentAttributedLabelViewController.xib */; };
 		44707C77159B06A700B83149 /* BasicInstantiationPagingScrollViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44707C76159B06A000B83149 /* BasicInstantiationPagingScrollViewController.m */; };
 		660C6F2915992B2500209EB3 /* BadgedLauncherButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 660C6F2815992B2500209EB3 /* BadgedLauncherButtonView.m */; };
 		6613335E15D3A66B00369333 /* SnapshotRotationTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6613335D15D3A66B00369333 /* SnapshotRotationTableViewController.m */; };
@@ -35,6 +37,7 @@
 		668B7673159394A200EA86F6 /* BasicInstantiationNetworkImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 668B7672159394A200EA86F6 /* BasicInstantiationNetworkImageViewController.m */; };
 		668B767B159394EF00EA86F6 /* NIImageProcessing.m in Sources */ = {isa = PBXBuildFile; fileRef = 668B7678159394EF00EA86F6 /* NIImageProcessing.m */; };
 		668B767C159394EF00EA86F6 /* NINetworkImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 668B767A159394EF00EA86F6 /* NINetworkImageView.m */; };
+		668EA9C417206F640056C8C3 /* NIActions.m in Sources */ = {isa = PBXBuildFile; fileRef = 668EA9C217206F640056C8C3 /* NIActions.m */; };
 		6692F58F159920E200FA074E /* BadgedLauncherViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6692F58E159920E200FA074E /* BadgedLauncherViewController.m */; };
 		6693C0F0158A63E600950D42 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6693C0EF158A63E600950D42 /* UIKit.framework */; };
 		6693C0F2158A63E600950D42 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6693C0F1158A63E600950D42 /* Foundation.framework */; };
@@ -126,6 +129,9 @@
 		2B960E7E15AE3A3B005714CA /* NavigationAppearanceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationAppearanceViewController.h; sourceTree = "<group>"; };
 		2B960E7F15AE3A3B005714CA /* NavigationAppearanceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavigationAppearanceViewController.m; sourceTree = "<group>"; };
 		2B960E8315AE41FC005714CA /* navigationbar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = navigationbar.png; path = Catalog/navigationbar.png; sourceTree = "<group>"; };
+		3616212916812222002A9078 /* AlignmentAttributedLabelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlignmentAttributedLabelViewController.h; sourceTree = "<group>"; };
+		3616212A16812222002A9078 /* AlignmentAttributedLabelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlignmentAttributedLabelViewController.m; sourceTree = "<group>"; };
+		3616212B16812222002A9078 /* AlignmentAttributedLabelViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AlignmentAttributedLabelViewController.xib; sourceTree = "<group>"; };
 		44707C75159B06A000B83149 /* BasicInstantiationPagingScrollViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BasicInstantiationPagingScrollViewController.h; sourceTree = "<group>"; };
 		44707C76159B06A000B83149 /* BasicInstantiationPagingScrollViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BasicInstantiationPagingScrollViewController.m; sourceTree = "<group>"; };
 		660C6F2715992B2500209EB3 /* BadgedLauncherButtonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BadgedLauncherButtonView.h; sourceTree = "<group>"; };
@@ -177,6 +183,9 @@
 		668B7678159394EF00EA86F6 /* NIImageProcessing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NIImageProcessing.m; path = ../../src/networkimage/src/NIImageProcessing.m; sourceTree = "<group>"; };
 		668B7679159394EF00EA86F6 /* NINetworkImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NINetworkImageView.h; path = ../../src/networkimage/src/NINetworkImageView.h; sourceTree = "<group>"; };
 		668B767A159394EF00EA86F6 /* NINetworkImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NINetworkImageView.m; path = ../../src/networkimage/src/NINetworkImageView.m; sourceTree = "<group>"; };
+		668EA9C117206F640056C8C3 /* NIActions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NIActions.h; path = ../../src/core/src/NIActions.h; sourceTree = "<group>"; };
+		668EA9C217206F640056C8C3 /* NIActions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NIActions.m; path = ../../src/core/src/NIActions.m; sourceTree = "<group>"; };
+		668EA9C317206F640056C8C3 /* NIActions+Subclassing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NIActions+Subclassing.h"; path = "../../src/core/src/NIActions+Subclassing.h"; sourceTree = "<group>"; };
 		6692F58D159920E200FA074E /* BadgedLauncherViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BadgedLauncherViewController.h; sourceTree = "<group>"; };
 		6692F58E159920E200FA074E /* BadgedLauncherViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BadgedLauncherViewController.m; sourceTree = "<group>"; };
 		6693C0EB158A63E600950D42 /* Nimbus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Nimbus.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -207,7 +216,6 @@
 		6693C1E2158A81D300950D42 /* NIInMemoryCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NIInMemoryCache.m; path = ../../src/core/src/NIInMemoryCache.m; sourceTree = "<group>"; };
 		6693C1E3158A81D300950D42 /* NimbusCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NimbusCore.h; path = ../../src/core/src/NimbusCore.h; sourceTree = "<group>"; };
 		6693C1E4158A81D300950D42 /* NimbusCore+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NimbusCore+Additions.h"; path = "../../src/core/src/NimbusCore+Additions.h"; sourceTree = "<group>"; };
-		6693C1E5158A81D300950D42 /* NimbusCore+Namespace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NimbusCore+Namespace.h"; path = "../../src/core/src/NimbusCore+Namespace.h"; sourceTree = "<group>"; };
 		6693C1E6158A81D300950D42 /* NINavigationAppearance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NINavigationAppearance.h; path = ../../src/core/src/NINavigationAppearance.h; sourceTree = "<group>"; };
 		6693C1E7158A81D300950D42 /* NINavigationAppearance.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NINavigationAppearance.m; path = ../../src/core/src/NINavigationAppearance.m; sourceTree = "<group>"; };
 		6693C1E8158A81D300950D42 /* NINetworkActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NINetworkActivity.h; path = ../../src/core/src/NINetworkActivity.h; sourceTree = "<group>"; };
@@ -330,6 +338,7 @@
 		66BB4FCD15959B5000020EE8 /* RestoringLauncherViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RestoringLauncherViewController.m; sourceTree = "<group>"; };
 		66CB01A215ACA85E0048E189 /* BlockCellsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlockCellsViewController.h; sourceTree = "<group>"; };
 		66CB01A315ACA85E0048E189 /* BlockCellsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlockCellsViewController.m; sourceTree = "<group>"; };
+		66CB9A1E1654306E00FFB4BF /* NIPagingScrollView+Subclassing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NIPagingScrollView+Subclassing.h"; path = "../../src/pagingscrollview/src/NIPagingScrollView+Subclassing.h"; sourceTree = "<group>"; };
 		66D2E54815D9613700281511 /* NIMutableTableViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NIMutableTableViewModel.h; path = ../../src/models/src/NIMutableTableViewModel.h; sourceTree = "<group>"; };
 		66D2E54915D9613800281511 /* NIMutableTableViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NIMutableTableViewModel.m; path = ../../src/models/src/NIMutableTableViewModel.m; sourceTree = "<group>"; };
 		66D2E54A15D9613800281511 /* NIMutableTableViewModel+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NIMutableTableViewModel+Private.h"; path = "../../src/models/src/NIMutableTableViewModel+Private.h"; sourceTree = "<group>"; };
@@ -556,6 +565,9 @@
 		6693C150158A64C100950D42 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				668EA9C117206F640056C8C3 /* NIActions.h */,
+				668EA9C217206F640056C8C3 /* NIActions.m */,
+				668EA9C317206F640056C8C3 /* NIActions+Subclassing.h */,
 				6693C1D5158A81D300950D42 /* NICommonMetrics.h */,
 				6693C1D6158A81D300950D42 /* NICommonMetrics.m */,
 				6693C1D7158A81D300950D42 /* NIDataStructures.h */,
@@ -572,7 +584,6 @@
 				6693C1E2158A81D300950D42 /* NIInMemoryCache.m */,
 				6693C1E3158A81D300950D42 /* NimbusCore.h */,
 				6693C1E4158A81D300950D42 /* NimbusCore+Additions.h */,
-				6693C1E5158A81D300950D42 /* NimbusCore+Namespace.h */,
 				6693C1E6158A81D300950D42 /* NINavigationAppearance.h */,
 				6693C1E7158A81D300950D42 /* NINavigationAppearance.m */,
 				6693C1E8158A81D300950D42 /* NINetworkActivity.h */,
@@ -686,6 +697,9 @@
 				66B6692E159BD22500FE4AE8 /* LongTapAttributedLabelViewController.m */,
 				6633C7ED158F08A40054D240 /* InterfaceBuilderAttributedLabelViewController.h */,
 				6633C7EE158F08A40054D240 /* InterfaceBuilderAttributedLabelViewController.m */,
+				3616212916812222002A9078 /* AlignmentAttributedLabelViewController.h */,
+				3616212A16812222002A9078 /* AlignmentAttributedLabelViewController.m */,
+				3616212B16812222002A9078 /* AlignmentAttributedLabelViewController.xib */,
 				6633C7F1158F08EA0054D240 /* AttributedLabelMashup.xib */,
 			);
 			name = "Attributed Label";
@@ -753,6 +767,7 @@
 				66A29F9815951C0000F6EA64 /* NIPageView.m */,
 				66A29F9915951C0000F6EA64 /* NIPagingScrollView.h */,
 				66A29F9A15951C0000F6EA64 /* NIPagingScrollView.m */,
+				66CB9A1E1654306E00FFB4BF /* NIPagingScrollView+Subclassing.h */,
 				66A29F9B15951C0000F6EA64 /* NIPagingScrollViewDataSource.h */,
 				66A29F9C15951C0000F6EA64 /* NIPagingScrollViewDelegate.h */,
 				66A29F9D15951C0000F6EA64 /* NIPagingScrollViewPage.h */,
@@ -846,7 +861,7 @@
 		6693C0E2158A63E600950D42 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0450;
+				LastUpgradeCheck = 0460;
 				ORGANIZATIONNAME = Nimbus;
 			};
 			buildConfigurationList = 6693C0E5158A63E600950D42 /* Build configuration list for PBXProject "NimbusCatalog" */;
@@ -887,6 +902,7 @@
 				6677FEE515AC8D1600517ABC /* circle.png in Resources */,
 				6677FEE715AC8D1C00517ABC /* star.png in Resources */,
 				2B960E8415AE41FC005714CA /* navigationbar.png in Resources */,
+				3616212D16812222002A9078 /* AlignmentAttributedLabelViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -989,6 +1005,8 @@
 				6633D21F15DDBD4100A4B07E /* ImagesAttributedLabelViewController.m in Sources */,
 				66D2E54B15D9613800281511 /* NIMutableTableViewModel.m in Sources */,
 				66D2E54F15D9616500281511 /* MutableTableModelViewController.m in Sources */,
+				3616212C16812222002A9078 /* AlignmentAttributedLabelViewController.m in Sources */,
+				668EA9C417206F640056C8C3 /* NIActions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1027,7 +1045,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1046,7 +1064,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1060,7 +1078,6 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Catalog/NimbusCatalog-Prefix.pch";
 				INFOPLIST_FILE = "Catalog/NimbusCatalog-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = Nimbus;
 				WRAPPER_EXTENSION = app;
@@ -1073,7 +1090,6 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Catalog/NimbusCatalog-Prefix.pch";
 				INFOPLIST_FILE = "Catalog/NimbusCatalog-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = Nimbus;
 				WRAPPER_EXTENSION = app;

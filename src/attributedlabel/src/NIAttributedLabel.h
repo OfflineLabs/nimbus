@@ -28,6 +28,10 @@
 // UITextAlignmentJustify is deprecated in iOS 6.0. Please use NSTextAlignmentJustified instead.
 #endif
 
+#if defined __cplusplus
+extern "C" {
+#endif
+
 /**
  * Calculates the ideal dimensions of an attributed string fitting a given size.
  *
@@ -39,12 +43,18 @@
  */
 CGSize NISizeOfAttributedStringConstrainedToSize(NSAttributedString *attributedString, CGSize size, NSInteger numberOfLines);
 
+#if defined __cplusplus
+};
+#endif
+
 // Vertical alignments for NIAttributedLabel.
 typedef enum {
   NIVerticalTextAlignmentTop = 0,
   NIVerticalTextAlignmentMiddle,
   NIVerticalTextAlignmentBottom,
 } NIVerticalTextAlignment;
+
+extern NSString * const kNILinkAttributeName;
 
 @protocol NIAttributedLabelDelegate;
 
@@ -53,7 +63,7 @@ typedef enum {
  *
  * Differences between UILabel and NIAttributedLabel:
  *
- * - @c UILineBreakModeHeadTruncation and @c UILineBreakModeMiddleTruncation only apply to single
+ * - @c NSLineBreakByTruncatingHead and @c NSLineBreakByTruncatingMiddle only apply to single
  *   lines and will not wrap the label regardless of the @c numberOfLines property. To wrap lines
  *   with any of these line break modes you must explicitly add newline characters to the string.
  * - When you assign an NSString to the text property the attributed label will create an

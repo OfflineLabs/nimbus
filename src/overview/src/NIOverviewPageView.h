@@ -16,7 +16,7 @@
 
 #import <UIKit/UIKit.h>
 
-#ifdef DEBUG
+#if defined(DEBUG) || defined(NI_DEBUG)
 
 #import "NIOverviewGraphView.h"
 
@@ -182,5 +182,15 @@
 
 @property (nonatomic, readwrite, NI_STRONG) NIMemoryCache* cache;
 @end
+
+
+/**
+ * A page that adds run-time inspection features.
+ *
+ *      @ingroup Overview-Pages
+ */
+@interface NIInspectionOverviewPageView : NIOverviewPageView
+@end
+
 
 #endif

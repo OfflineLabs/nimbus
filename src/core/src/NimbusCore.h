@@ -98,12 +98,15 @@ view.autoresizingMask = (UIViewAutoresizingFlexibleLeftMargin
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+#import "NIActions.h"
+#import "NIButtonUtilities.h"
 #import "NICommonMetrics.h"
 #import "NIDataStructures.h"
 #import "NIDebuggingTools.h"
 #import "NIDeviceOrientation.h"
 #import "NIError.h"
 #import "NIFoundationMethods.h"
+#import "NIImageUtilities.h"
 #import "NIInMemoryCache.h"
 #import "NINavigationAppearance.h"
 #import "NINetworkActivity.h"

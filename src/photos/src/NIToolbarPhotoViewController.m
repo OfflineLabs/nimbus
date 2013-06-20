@@ -214,14 +214,6 @@
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-- (void)viewDidUnload {
-  [self shutdown_NIToolbarPhotoViewController];
-
-  [super viewDidUnload];
-}
-
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)viewWillAppear:(BOOL)animated {
   [super viewWillAppear:animated];
 
@@ -240,9 +232,11 @@
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
+#if __IPHONE_OS_VERSION_MIN_REQUIRED < NIIOS_6_0
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation {
   return NIIsSupportedOrientation(toInterfaceOrientation);
 }
+#endif
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -443,6 +437,12 @@
   self.previousButton.enabled = [self.photoAlbumView hasPrevious];
   self.nextButton.enabled = [self.photoAlbumView hasNext];
 
+  [self setChromeTitle];
+}
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (void)setChromeTitle {
   self.title = [NSString stringWithFormat:@"%d of %d",
                 (self.photoAlbumView.centerPageIndex + 1),
                 self.photoAlbumView.numberOfPages];

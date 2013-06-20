@@ -19,11 +19,31 @@
 
 #import "NIPreprocessorMacros.h" /* for NI_WEAK */
 
-// Flags set on the cell's backgroundView's tag property to indicate placement of the cell.
+/**
+ * The NIGroupedCellAppearance protocol provides support for each cell to adjust their appearance.
+ *
+ *      @ingroup TableCellBackgrounds
+ */
+@protocol NIGroupedCellAppearance <NSObject>
+
+@optional
+
+/**
+ * Determines whether or not to draw a divider between cells. 
+ * 
+ * If the cell does not implement this method, a cell divider will be provided.
+ */
+- (BOOL)drawsCellDivider;
+
+@end
+
+
+// Flags set on the cell's backgroundView's tag property.
 typedef enum {
   NIGroupedCellBackgroundFlagIsLast       = (1 << 0),
   NIGroupedCellBackgroundFlagIsFirst      = (1 << 1),
   NIGroupedCellBackgroundFlagInitialized  = (1 << 2),
+  NIGroupedCellBackgroundFlagNoDivider    = (1 << 3),
 } NIGroupedCellBackgroundFlag;
 
 /**
@@ -36,11 +56,13 @@ typedef enum {
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath;
 
-- (UIImage *)imageForFirst:(BOOL)first last:(BOOL)last highlighted:(BOOL)highlighted;
+- (UIImage *)imageForFirst:(BOOL)first last:(BOOL)last highlighted:(BOOL)highlighted; // Default: drawDivider: True
+- (UIImage *)imageForFirst:(BOOL)first last:(BOOL)last highlighted:(BOOL)highlighted drawDivider:(BOOL)drawDivider;
 
 @property (nonatomic, NI_STRONG) UIColor* innerBackgroundColor; // Default: [UIColor whiteColor]
 @property (nonatomic, NI_STRONG) NSMutableArray* highlightedInnerGradientColors; // Default: RGBCOLOR(53, 141, 245), RGBCOLOR(16, 93, 230)
 @property (nonatomic, assign) CGFloat shadowWidth; // Default: 4
+@property (nonatomic, assign) CGSize shadowOffset; // Default: CGSizeMake(0, 1)
 @property (nonatomic, NI_STRONG) UIColor* shadowColor; // Default: RGBACOLOR(0, 0, 0, 0.3)
 @property (nonatomic, NI_STRONG) UIColor* borderColor; // Default: RGBACOLOR(0, 0, 0, 0.07)
 @property (nonatomic, NI_STRONG) UIColor* dividerColor; // Default: RGBCOLOR(230, 230, 230)

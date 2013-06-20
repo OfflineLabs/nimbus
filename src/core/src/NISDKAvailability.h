@@ -101,9 +101,14 @@
 #define NIIOS_5_1     50100
 
 /**
- * Release TBD. Should be sometime between September and October.
+ * Released on September 19, 2012.
  */
 #define NIIOS_6_0     60000
+
+/**
+ * Released on January 28, 2013.
+ */
+#define NIIOS_6_1     60100
 
 #ifndef kCFCoreFoundationVersionNumber_iPhoneOS_2_0
 #define kCFCoreFoundationVersionNumber_iPhoneOS_2_0 478.23
@@ -165,6 +170,14 @@ extern "C" {
 BOOL NIIsPad(void);
 
 /**
+ * Checks whether the device the app is currently running on is an
+ * iPhone/iPod touch or not.
+ *
+ *      @returns YES if the device is an iPhone or iPod touch.
+ */
+BOOL NIIsPhone(void);
+
+/**
  * Checks whether the device's OS version is at least the given version number.
  *
  * Useful for runtime checks of the device's version number.
@@ -183,6 +196,11 @@ BOOL NIDeviceOSVersionIsAtLeast(double versionNumber);
  *     iOS 4.0: returns the device's screen scale.
  */
 CGFloat NIScreenScale(void);
+
+/**
+ * Returns YES if the screen is a retina display, NO otherwise.
+ */
+BOOL NIIsRetina(void);
 
 /**
  * Safely fetch the UIPopoverController class if it is available.

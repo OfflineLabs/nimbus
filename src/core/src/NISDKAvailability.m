@@ -37,6 +37,16 @@ BOOL NIIsPad(void) {
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
+BOOL NIIsPhone(void) {
+  static NSInteger isPhone = -1;
+  if (isPhone < 0) {
+    isPhone = ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) ? 1 : 0;
+  }
+  return isPhone > 0;
+}
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
 BOOL NIDeviceOSVersionIsAtLeast(double versionNumber) {
   return kCFCoreFoundationVersionNumber >= versionNumber;
 }
@@ -56,6 +66,12 @@ CGFloat NIScreenScale(void) {
   } else {
     return 1;
   }
+}
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+BOOL NIIsRetina(void) {
+  return NIScreenScale() == 2.f;
 }
 
 

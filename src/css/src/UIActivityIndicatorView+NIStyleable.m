@@ -34,14 +34,24 @@ NI_FIX_CATEGORY_BUG(UIActivityIndicatorView_NIStyleable)
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)applyActivityIndicatorStyleWithRuleSet:(NICSSRuleset *)ruleSet {
-  if ([ruleSet hasActivityIndicatorStyle]) { [self setActivityIndicatorViewStyle:ruleSet.activityIndicatorStyle]; } else { [self setActivityIndicatorViewStyle:UIActivityIndicatorViewStyleWhiteLarge]; }
+  [self applyActivityIndicatorStyleWithRuleSet:ruleSet inDOM:nil];
 }
 
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (void)applyActivityIndicatorStyleWithRuleSet:(NICSSRuleset *)ruleSet inDOM:(NIDOM *)dom {
+  if ([ruleSet hasActivityIndicatorStyle]) { [self setActivityIndicatorViewStyle:ruleSet.activityIndicatorStyle]; } else { [self setActivityIndicatorViewStyle:UIActivityIndicatorViewStyleWhiteLarge]; }
+  if ([ruleSet hasTextColor]) { [self setColor:ruleSet.textColor]; }
+}
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)applyStyleWithRuleSet:(NICSSRuleset *)ruleSet {
-  [self applyViewStyleWithRuleSet:ruleSet];
-  [self applyActivityIndicatorStyleWithRuleSet:ruleSet];
+  [self applyStyleWithRuleSet:ruleSet inDOM:nil];
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (void)applyStyleWithRuleSet:(NICSSRuleset *)ruleSet inDOM:(NIDOM *)dom {
+  [self applyViewStyleWithRuleSet:ruleSet inDOM:dom];
+  [self applyActivityIndicatorStyleWithRuleSet:ruleSet inDOM:dom];
 }
 
 

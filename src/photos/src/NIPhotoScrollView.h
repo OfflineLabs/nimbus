@@ -36,6 +36,7 @@
   UIImageView* _imageView;
   // The scroll view.
   NICenteringScrollView* _scrollView;
+  UIActivityIndicatorView* _loadingView;
 
   // Photo Information
   NIPhotoScrollViewPhotoSize _photoSize;
@@ -63,9 +64,11 @@
 - (UIImage *)image;
 - (NIPhotoScrollViewPhotoSize)photoSize;
 - (void)setImage:(UIImage *)image photoSize:(NIPhotoScrollViewPhotoSize)photoSize;
+@property (nonatomic, assign, getter = isLoading) BOOL loading;
 
 @property (nonatomic, readwrite, assign) NSInteger pageIndex;
 @property (nonatomic, readwrite, assign) CGSize photoDimensions;
+@property (nonatomic, readonly, NI_STRONG) UITapGestureRecognizer* doubleTapGestureRecognizer;
 
 @end
 
@@ -169,4 +172,12 @@
  * CGSizeZero is used to signify an unknown final photo dimension.
  *
  *      @fn NIPhotoScrollView::photoDimensions
+ */
+
+/**
+ * The gesture recognizer for double-tapping zooms in and out of the image.
+ *
+ * This is used mainly for setting up dependencies between gesture recognizers.
+ *
+ *      @fn NIPhotoScrollView::doubleTapGestureRecognizer
  */

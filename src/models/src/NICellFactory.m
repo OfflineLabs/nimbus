@@ -52,6 +52,11 @@
 
   NSString* identifier = NSStringFromClass(cellClass);
 
+  if ([cellClass respondsToSelector:@selector(shouldAppendObjectClassToReuseIdentifier)]
+      && [cellClass shouldAppendObjectClassToReuseIdentifier]) {
+    identifier = [identifier stringByAppendingFormat:@".%@", NSStringFromClass([object class])];
+  }
+
   cell = [tableView dequeueReusableCellWithIdentifier:identifier];
 
   if (nil == cell) {
@@ -95,6 +100,9 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (Class)cellClassFromObject:(id)object {
+  if (nil == object) {
+    return nil;
+  }
   Class objectClass = [object class];
   Class cellClass = [self.objectToCellMap objectForKey:objectClass];
 
@@ -105,7 +113,7 @@
   }
 
   if (nil == cellClass) {
-    cellClass = [self.class objectFromKeyClass:objectClass map:self.objectToCellMap];
+    cellClass = [NIActions objectFromKeyClass:objectClass map:self.objectToCellMap];
   }
 
   return cellClass;
@@ -172,52 +180,6 @@
     }
   }
   return height;
-}
-
-@end
-
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////
-@implementation NICellFactory (KeyClassMapping)
-
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
-+ (id)objectFromKeyClass:(Class)keyClass map:(NSMutableDictionary *)map {
-  id object = [map objectForKey:keyClass];
-
-  if (nil == object) {
-    // No mapping found for this key class, but it may be a subclass of another object that does
-    // have a mapping, so let's see what we can find.
-    Class superClass = nil;
-    for (Class class in map.allKeys) {
-      // We want to find the lowest node in the class hierarchy so that we pick the lowest ancestor
-      // in the hierarchy tree.
-      if ([keyClass isSubclassOfClass:class]
-          && (nil == superClass || [keyClass isSubclassOfClass:superClass])) {
-        superClass = class;
-      }
-    }
-
-    if (nil != superClass) {
-      object = [map objectForKey:superClass];
-
-      // Add this subclass to the map so that next time this result is instant.
-      [map setObject:object forKey:(id<NSCopying>)keyClass];
-    }
-  }
-
-  if (nil == object) {
-    // We couldn't find a mapping at all so let's add an empty mapping.
-    [map setObject:[NSNull class] forKey:(id<NSCopying>)keyClass];
-
-  } else if (object == [NSNull class]) {
-    // Don't return null mappings.
-    object = nil;
-  }
-
-  return object;
 }
 
 @end

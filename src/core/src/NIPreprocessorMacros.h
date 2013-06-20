@@ -113,7 +113,7 @@ NI_FIX_CATEGORY_BUG(UIViewController_MyCustomCategory);
  * categories and no classes.
  * See http://developer.apple.com/library/mac/#qa/qa2006/qa1490.html for more info.
  */
-#define NI_FIX_CATEGORY_BUG(name) @interface NI_FIX_CATEGORY_BUG_##name @end \
+#define NI_FIX_CATEGORY_BUG(name) @interface NI_FIX_CATEGORY_BUG_##name : NSObject @end \
 @implementation NI_FIX_CATEGORY_BUG_##name @end
 
 /**
@@ -135,7 +135,7 @@ NI_FIX_CATEGORY_BUG(UIViewController_MyCustomCategory);
     #define NI_WEAK weak
     #define NI_STRONG strong
 #elif defined(__has_feature)  && __has_feature(objc_arc)
-    #define NI_WEAK __unsafe_unretained
+    #define NI_WEAK unsafe_unretained
     #define NI_STRONG retain
 #else
     #define NI_WEAK assign
