@@ -256,6 +256,11 @@ CGSize NISizeOfAttributedStringConstrainedToSize(NSAttributedString *attributedS
   return NISizeOfAttributedStringConstrainedToSize([self mutableAttributedStringWithAdditions], size, self.numberOfLines);
 }
 
+- (CGSize)sizeThatFitsDefault:(CGSize)size
+{
+    return [super sizeThatFits:size];
+}
+
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////

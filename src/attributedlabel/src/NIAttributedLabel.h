@@ -120,6 +120,7 @@ extern NSString * const kNILinkAttributeName;
 - (void)insertImage:(UIImage *)image atIndex:(NSInteger)index margins:(UIEdgeInsets)margins verticalTextAlignment:(NIVerticalTextAlignment)verticalTextAlignment;
 
 - (CGSize)sizeThatFits:(CGSize)size;
+- (CGSize)sizeThatFitsDefault:(CGSize)size;
 
 @property (nonatomic, NI_WEAK) IBOutlet id<NIAttributedLabelDelegate> delegate;
 @end
