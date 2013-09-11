@@ -110,7 +110,7 @@ CGSize NISizeOfAttributedStringConstrainedToSize(NSAttributedString *attributedS
 
 @interface NIAttributedLabel() <UIActionSheetDelegate>
 @property (nonatomic, NI_STRONG) NSMutableAttributedString* mutableAttributedString;
-@property (nonatomic, assign) CTFrameRef textFrame;
+@property (nonatomic, assign) CTFrameRef textFrame; // CFType, manually managed lifetime, see setter.
 @property (assign) BOOL detectingLinks; // Atomic.
 @property (nonatomic, assign) BOOL linksHaveBeenDetected;
 @property (nonatomic, copy) NSArray* detectedlinkLocations;
@@ -126,13 +126,14 @@ CGSize NISizeOfAttributedStringConstrainedToSize(NSAttributedString *attributedS
 
 
 @interface NIAttributedLabel(ConversionUtilities)
-#if __IPHONE_OS_VERSION_MIN_REQUIRED < NIIOS_6_0
+// Only use UITextAlignment if deployment target is less than 6.0 and
+// not on iOS 7 SDK.
+#if __IPHONE_OS_VERSION_MAX_ALLOWED < NIIOS_7_0 && __IPHONE_OS_VERSION_MIN_REQUIRED < NIIOS_6_0
 + (CTTextAlignment)alignmentFromUITextAlignment:(UITextAlignment)alignment;
-+ (CTLineBreakMode)lineBreakModeFromUILineBreakMode:(NSLineBreakMode)lineBreakMode;
 #else
 + (CTTextAlignment)alignmentFromUITextAlignment:(NSTextAlignment)alignment;
-+ (CTLineBreakMode)lineBreakModeFromUILineBreakMode:(NSLineBreakMode)lineBreakMode;
 #endif
++ (CTLineBreakMode)lineBreakModeFromUILineBreakMode:(NSLineBreakMode)lineBreakMode;
 + (NSMutableAttributedString *)mutableAttributedStringFromLabel:(UILabel *)label;
 @end
 
@@ -178,8 +179,26 @@ CGSize NISizeOfAttributedStringConstrainedToSize(NSAttributedString *attributedS
 - (void)dealloc {
   [_longPressTimer invalidate];
 
-  if (nil != _textFrame) {
+  // The property is marked 'assign', but retain count for this CFType is managed here and via
+  // the setter.
+  if (NULL != _textFrame) {
     CFRelease(_textFrame);
+  }
+}
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (void)setTextFrame:(CTFrameRef)textFrame {
+  // The property is marked 'assign', but retain count for this CFType is managed via this setter
+  // and -dealloc.
+  if (textFrame != _textFrame) {
+    if (NULL != _textFrame) {
+      CFRelease(_textFrame);
+    }
+    if (NULL != textFrame) {
+      CFRetain(textFrame);
+    }
+    _textFrame = textFrame;
   }
 }
 
@@ -219,10 +238,7 @@ CGSize NISizeOfAttributedStringConstrainedToSize(NSAttributedString *attributedS
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)resetTextFrame {
-  if (nil != self.textFrame) {
-    CFRelease(self.textFrame);
-    self.textFrame = nil;
-  }
+  self.textFrame = NULL;
   self.accessibleElements = nil;
 }
 
@@ -369,7 +385,10 @@ CGSize NISizeOfAttributedStringConstrainedToSize(NSAttributedString *attributedS
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-#if __IPHONE_OS_VERSION_MIN_REQUIRED < NIIOS_6_0
+
+// Only use UITextAlignment if deployment target is less than 6.0 and
+// not on iOS 7 SDK.
+#if __IPHONE_OS_VERSION_MAX_ALLOWED < NIIOS_7_0 && __IPHONE_OS_VERSION_MIN_REQUIRED < NIIOS_6_0
 - (void)setTextAlignment:(UITextAlignment)textAlignment {
   // UILabel doesn't implement UITextAlignmentJustify, so we can't call super when this is the case
   // or the app will crash.
@@ -406,7 +425,6 @@ CGSize NISizeOfAttributedStringConstrainedToSize(NSAttributedString *attributedS
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-#if __IPHONE_OS_VERSION_MIN_REQUIRED < NIIOS_6_0
 - (void)setLineBreakMode:(NSLineBreakMode)lineBreakMode {
   [super setLineBreakMode:lineBreakMode];
 
@@ -416,17 +434,6 @@ CGSize NISizeOfAttributedStringConstrainedToSize(NSAttributedString *attributedS
     [self.mutableAttributedString setTextAlignment:alignment lineBreakMode:lineBreak lineHeight:self.lineHeight];
   }
 }
-#else
-- (void)setLineBreakMode:(NSLineBreakMode)lineBreakMode {
-  [super setLineBreakMode:lineBreakMode];
-
-  if (nil != self.mutableAttributedString) {
-    CTTextAlignment alignment = [self.class alignmentFromUITextAlignment:self.textAlignment];
-    CTLineBreakMode lineBreak = [self.class lineBreakModeFromUILineBreakMode:lineBreakMode];
-    [self.mutableAttributedString setTextAlignment:alignment lineBreakMode:lineBreak lineHeight:self.lineHeight];
-  }
-}
-#endif
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1181,7 +1188,7 @@ CGSize NISizeOfAttributedStringConstrainedToSize(NSAttributedString *attributedS
     if (self.attributesForLinks.count > 0) {
       [attributedString addAttributes:self.attributesForLinks range:result.range];
     }
-    if (self.attributesForHighlightedLink.count > 0 && result == self.touchedLink) {
+    if (self.attributesForHighlightedLink.count > 0 && NSEqualRanges(result.range, self.touchedLink.range)) {
       [attributedString addAttributes:self.attributesForHighlightedLink range:result.range];
     }
   }
@@ -1482,13 +1489,17 @@ CGSize NISizeOfAttributedStringConstrainedToSize(NSAttributedString *attributedS
     CGAffineTransform transform = [self _transformForCoreText];
     CGContextConcatCTM(ctx, transform);
 
-    if (nil == self.textFrame) {
+    if (NULL == self.textFrame) {
       CFAttributedStringRef attributedString = (__bridge CFAttributedStringRef)attributedStringWithLinks;
       CTFramesetterRef framesetter = CTFramesetterCreateWithAttributedString(attributedString);
 
       CGMutablePathRef path = CGPathCreateMutable();
-      CGPathAddRect(path, nil, rect);
-      self.textFrame = CTFramesetterCreateFrame(framesetter, CFRangeMake(0, 0), path, NULL);
+      CGPathAddRect(path, NULL, rect);
+      CTFrameRef textFrame = CTFramesetterCreateFrame(framesetter, CFRangeMake(0, 0), path, NULL);
+      self.textFrame = textFrame;
+      if (textFrame) {
+        CFRelease(textFrame);
+      }
       CGPathRelease(path);
       CFRelease(framesetter);
     }
@@ -1714,7 +1725,7 @@ CGFloat ImageDelegateGetWidthCallback(void* refCon) {
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-#if __IPHONE_OS_VERSION_MIN_REQUIRED < NIIOS_6_0
+#if __IPHONE_OS_VERSION_MAX_ALLOWED < NIIOS_7_0 && __IPHONE_OS_VERSION_MIN_REQUIRED < NIIOS_6_0
 + (CTTextAlignment)alignmentFromUITextAlignment:(UITextAlignment)alignment {
   // UITextAlignmentJustify is not part of the UITextAlignment enumeration, so we cast to NSInteger
   // to tell Xcode not to coerce us into only using real UITextAlignment valus.
@@ -1740,7 +1751,6 @@ CGFloat ImageDelegateGetWidthCallback(void* refCon) {
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-#if __IPHONE_OS_VERSION_MIN_REQUIRED < NIIOS_6_0
 + (CTLineBreakMode)lineBreakModeFromUILineBreakMode:(NSLineBreakMode)lineBreakMode {
   switch (lineBreakMode) {
     case NSLineBreakByWordWrapping: return kCTLineBreakByWordWrapping;
@@ -1752,20 +1762,6 @@ CGFloat ImageDelegateGetWidthCallback(void* refCon) {
     default: return 0;
   }
 }
-#else
-+ (CTLineBreakMode)lineBreakModeFromUILineBreakMode:(NSLineBreakMode)lineBreakMode {
-  switch (lineBreakMode) {
-    case NSLineBreakByWordWrapping: return kCTLineBreakByWordWrapping;
-    case NSLineBreakByCharWrapping: return kCTLineBreakByCharWrapping;
-    case NSLineBreakByClipping: return kCTLineBreakByClipping;
-    case NSLineBreakByTruncatingHead: return kCTLineBreakByTruncatingHead;
-    case NSLineBreakByTruncatingTail: return kCTLineBreakByWordWrapping; // We handle truncation ourself.
-    case NSLineBreakByTruncatingMiddle: return kCTLineBreakByTruncatingMiddle;
-    default: return 0;
-  }
-}
-#endif
-
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 + (NSMutableAttributedString *)mutableAttributedStringFromLabel:(UILabel *)label {
