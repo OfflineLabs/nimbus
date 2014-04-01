@@ -265,11 +265,12 @@ CGSize NISizeOfAttributedStringConstrainedToSize(NSAttributedString *attributedS
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (CGSize)sizeThatFits:(CGSize)size {
-  if (nil == self.mutableAttributedString) {
-    return CGSizeZero;
-  }
-
-  return NISizeOfAttributedStringConstrainedToSize([self mutableAttributedStringWithAdditions], size, self.numberOfLines);
+//  if (nil == self.mutableAttributedString) {
+//    return CGSizeZero;
+//  }
+//
+//  return NISizeOfAttributedStringConstrainedToSize([self mutableAttributedStringWithAdditions], size, self.numberOfLines);
+    return [super sizeThatFits:size];
 }
 
 - (CGSize)sizeThatFitsDefault:(CGSize)size
